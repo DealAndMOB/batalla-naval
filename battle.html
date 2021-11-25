@@ -1,0 +1,137 @@
+<script>
+menu();  
+function menu(){
+    var bienvenida = alert("Bienvenido a la batalla naval");
+    var menu = prompt("¿Que desea hacer? \n 1. Jugar \n 2. Instrucciones \n 3. Salir");
+    switch(menu){
+        case "1":
+        alert("ingresa los nombres de los dos jugadores");
+        var jugador1 = prompt("Nombre del Jugador 1");
+        console.log("El jugador uno es: " + jugador1);
+        var jugador2 = prompt("Nombre del Jugador 2");
+        console.log("El jugador dos es: " + jugador2);
+
+        tablero1 = [0,0,0,0,0,0,0,0,0,0];
+        tablero2 = [0,0,0,0,0,0,0,0,0,0];
+
+        console.log("El tablero del jugador " + jugador1 + " es: " + tablero1);
+        console.log("El tablero del jugador " + jugador2 + " es: " + tablero2);
+        barcos();
+        turno();
+        while(tablero1.indexOf(1) != -1 && tablero2.indexOf(1) != -1){
+        turno();
+        if(tablero1.indexOf(1) == -1){
+        alert("El jugador " + jugador2 + " ha ganado");
+    }else{
+        alert("El jugador " + jugador1 + " ha ganado");
+    }   
+    if(tablero1.indexOf(1) == -1 || tablero2.indexOf(1) == -1){
+        break;
+    }
+    }
+         
+            break;
+        case "2":
+            instrucciones();
+            break;
+        case "3":
+            salir();
+            break;
+        default:
+            alert("Ingrese una opcion valida");
+            menu();
+    }
+
+//genera los barcos
+function barcos(){
+
+    var barcos1 = prompt("¿Cuantos barcos para el jugador " + jugador1 + "?");
+   if(barcos1 > 10){
+       alert("No puede haber mas de 10 barcos");
+       barcos();
+    }
+    for(var i = 0; i < barcos1; i++){
+        var posicion = prompt("Ingrese la posicion del barco " + (i+1));
+        tablero1.splice(posicion,1,1);
+    }
+    console.log("El tablero del jugador " + jugador1 + " es: " + tablero1);
+    var barcos2 = prompt("¿Cuantos barcos para el jugador " + jugador2 + "?");
+    if(barcos2 > 10){
+        alert("No puede haber mas de 10 barcos");
+        barcos();
+     }
+     for(var j = 0; j < barcos2; j++){
+        var posicion = prompt("Ingrese la posicion del barco " + (j+1));
+        tablero2.splice(posicion,1,1);
+    }
+    console.log("El tablero del jugador " + jugador2 + " es: " + tablero2);
+}
+//genera los turnos y muestra al ganador
+function turno1(){
+    var turno1 = prompt("Turno del jugador " + jugador1 + " ingrese la posicion del disparo");
+    if(tablero2[turno1] ==1){
+        alert("destruiste un barco");
+        if(tablero2.indexOf(1) == -1){
+            alert("El jugador " + jugador1 + " ha ganado");
+        }
+    }else{
+        alert("no hay nada");
+    }
+}
+function turno2(){
+    var turno2 = prompt("Turno del jugador " + jugador2 + " ingrese la posicion del disparo");
+    if(tablero1[turno2] ==1){
+        alert("destruiste un barco");
+        if(tablero1.indexOf(1) == -1){
+            alert("El jugador " + jugador2 + " ha ganado");
+        }
+    }else{
+        alert("no hay nada");
+    }
+}
+function turno(){
+    var turno = prompt("¿Quien inicia el juego? \n 1. " + jugador1 + " \n 2. " + jugador2);
+  while(turno != 1 && turno != 2){
+    alert("Ingrese una opcion valida");
+    turno();
+  }
+    if(turno == 1){
+        turno1();
+        turno2();
+    }else{
+        turno2();
+        turno1();
+    }
+    
+
+}
+
+    
+//muestra las instrucciones
+function instrucciones(){
+    console.log("las instruciones de este juego es destruir los barcos del rival hasta que se quede sin barcos \n contando que las posiciones son del 0 al 9 y ser claro en todas las peticiones de registro y juego");
+    var instrucciones = prompt("¿Desea volver al menu? \n 1. Si \n 2. No");
+    switch(instrucciones){
+        case "1":
+            menu();
+            break;
+        case "2":
+            salir();
+            break;
+        default:
+            alert("Ingrese una opcion valida");
+            instrucciones();
+    }
+}
+//sale del juego
+function salir(){
+    alert("Gracias por jugar");
+}
+
+    
+}
+
+</script>
+
+
+
